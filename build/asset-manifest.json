@@ -1,0 +1,21 @@
+{
+  "files": {
+    "main.css": "/adventure/static/css/main.baa3f4f7.chunk.css",
+    "main.js": "/adventure/static/js/main.b91add2e.chunk.js",
+    "main.js.map": "/adventure/static/js/main.b91add2e.chunk.js.map",
+    "runtime-main.js": "/adventure/static/js/runtime-main.51a82982.js",
+    "runtime-main.js.map": "/adventure/static/js/runtime-main.51a82982.js.map",
+    "static/js/2.f91b833e.chunk.js": "/adventure/static/js/2.f91b833e.chunk.js",
+    "static/js/2.f91b833e.chunk.js.map": "/adventure/static/js/2.f91b833e.chunk.js.map",
+    "index.html": "/adventure/index.html",
+    "static/css/main.baa3f4f7.chunk.css.map": "/adventure/static/css/main.baa3f4f7.chunk.css.map",
+    "static/js/2.f91b833e.chunk.js.LICENSE.txt": "/adventure/static/js/2.f91b833e.chunk.js.LICENSE.txt",
+    "static/media/stylesheet.css": "/adventure/static/media/endor.fc2741e7.ttf"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.51a82982.js",
+    "static/js/2.f91b833e.chunk.js",
+    "static/css/main.baa3f4f7.chunk.css",
+    "static/js/main.b91add2e.chunk.js"
+  ]
+}
