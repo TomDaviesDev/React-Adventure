@@ -1,0 +1,721 @@
+@font-face {
+	font-family: "EndorFont";
+	src: local("EndorFont"), url(./Fonts/endor.ttf) format("truetype");
+}
+
+html, body, #root, .App {
+	height: 100%;
+	margin: 0px;
+	/*font-family: "EndorFont";*/
+	font-weight: 500;
+	letter-spacing: 0.75px;
+	overflow: auto;
+	background-color: black;
+	/*background:repeating-linear-gradient(135deg, #222, #222 10px, #555 10px, #555 20px)*/
+}
+
+div :focus {
+	outline: 3px auto Highlight;
+	outline: 3px auto -webkit-focus-ring-color;
+}
+
+#start :focus { /*Start button is focusable, but not visibly so.*/
+	outline: 10px auto lightskyblue;
+}
+
+#gameover {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	-ms-transform: translate(-50%, -50%);
+	transform: translate(-50%, -50%);
+	color: white;
+	padding: 15px;
+	font-size: 6vmin;
+}
+
+#game {
+	margin: 0;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	-ms-transform: translate(-50%, -50%);
+	transform: translate(-50%, -50%);
+	width: 100%;
+	height: 100%;
+	text-align: center;
+	background-color: black;
+	color: white;
+}
+
+#start {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	-ms-transform: translate(-50%, -50%);
+	transform: translate(-50%, -50%);
+	border: solid 1px white;
+	color: white;
+	border-radius: 15px;
+	padding: 15px;
+	font-size: 40px;
+	transition-duration: 0.4s;
+	cursor: pointer;
+	text-decoration: none;
+	box-shadow: 0 9px #999;
+}
+
+#restart {
+	border: solid 1px white;
+	color: white;
+	border-radius: 15px;
+	padding: 15px;
+	font-size: 5vmin;
+	transition-duration: 0.4s;
+	cursor: pointer;
+	text-decoration: none;
+	box-shadow: 0 9px #999;
+	margin-top: 60px;
+}
+
+.text {
+	text-align: center;
+	width: 60vw;
+	height: 50vh;
+	margin-top: 30px;
+	margin-left: auto;
+	margin-right: auto;
+	padding: 20px;
+	border: solid 1px white;
+	font-size: 3vmin;
+	position: relative;
+}
+
+#actionContainer {
+	width: 60vw;
+	height: 30vh;
+	margin-left: auto;
+	margin-right: auto;
+	padding: 20px;
+	border: solid 1px white;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.actions {
+	margin-left: auto;
+	margin-right: auto;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	-webkit-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	height: 100%;
+	width: 100%;
+}
+
+.action {
+	padding: 5px;
+	background-color: #B2A793;
+	font-size: 2.5vmin;
+	font-weight: bold;
+	border: groove 1px #929292;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	color: black;
+	cursor: pointer;
+	display: inline-block;
+}
+
+.content {
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	overflow: auto;
+}
+
+.content p{
+	margin-top: 0.75vh;
+	margin-bottom: 0.75vh;
+}
+
+#inventoryDiv {
+	height: 100%;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+	overflow: auto;
+	position: relative;
+}
+
+#inventoryDiv p{
+	margin: none;
+	margin-top: 0.75vh;
+	margin-bottom: 0.75vh;
+}
+
+#equipmentDiv {
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 100%;
+}
+
+.equipmentContainerDiv {
+	display: flex;
+	height: 16.66%;
+}
+
+.equipmentLabel {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 8.3vw;
+	font-size: 2vw;
+	padding: 5px;
+}
+
+.equipment {
+	color: cadetblue;
+	display: flex;
+	align-items: center;
+	font-size: 1.5vw;
+	padding: 5px;
+	cursor: pointer;
+	-webkit-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
+#closeInventoryButton {
+	position: absolute;
+	top: 0;
+	right: 0;
+	cursor: pointer;
+	-webkit-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
+#characterButton {
+	margin: none;
+	position: absolute;
+	top: 0;
+	right: 0;
+	border: outset 2px lightgray;
+	border-top: none;
+	border-right: none;
+	width: 5vw;
+	height: 3vh;
+	font-size: 1vw;
+	cursor: pointer;
+	-webkit-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	line-height: 3vh;
+}
+
+.statMinus {
+	width: 40px;
+	height: 40px;
+	line-height: 40px;
+	border: outset 2px white;
+	background-color: rgb(139, 0, 0);
+	margin-right: auto;
+	cursor: pointer;
+	-webkit-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
+.statPlus {
+	width: 40px;
+	height: 40px;
+	line-height: 40px;
+	border: outset 2px white;
+	background-color: darkgreen;
+	margin-left: auto;
+	cursor: pointer;
+	-webkit-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
+.statsContainer {
+	display: inline-flex;
+	position: relative;
+}
+
+.hidden {
+	display: none;
+}
+
+.statistics {
+	margin-right: 10px;
+	margin-left: 10px;
+	cursor: help;
+}
+
+.statInfo {
+	background: #B2A793;
+	color: black;
+	text-align: center;
+	font-size: 2vmin;
+	z-index: 1;
+	width: 150%;
+	left: -25%;
+	top: 6vmin;
+	position: absolute;
+	padding: 5px;
+	border-radius: 6px;
+}
+
+.statsContainer .statInfo:before {
+	content: "";
+	position: absolute;
+	width: 0;
+	height: 0;
+	border-width: 10px;
+	border-style: solid;
+	border-color: transparent transparent #B2A793 transparent;
+	top: -2vmin;
+	left: 50%;
+}
+
+#applyPointsDiv {
+	position: relative;
+	top: 2vh;
+	border: solid 1px slategray;
+	padding: 5px;
+	padding-bottom: 5px;
+	width: fit-content;
+	display: inline-flex;
+	cursor: pointer;
+	font-size: 3.5vmin;
+}
+
+#pointsRemainingDiv {
+	position: relative;
+	top: 2vh;
+	padding: 6px;
+}
+
+#statisticsDiv {
+	display: flex;
+	flex-direction: column;
+	margin: 0.5%;
+}
+
+#itemContainer {
+	margin-left: auto;
+	margin-right: auto;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	-webkit-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	position: relative;
+	width: 50%;
+	height: 100%;
+}
+
+.itemContainerOverflow {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	-webkit-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	position: relative;
+	height: 85%;
+	overflow-y: auto;
+	scrollbar-gutter: stable both-edges;
+	padding-right: 17px;
+	padding-left: 17px;
+}
+
+#spellContainer {
+	margin-left: auto;
+	margin-right: auto;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	-webkit-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	position: relative;
+	width: 50%;
+	height: 100%;
+}
+
+.spellContainerOverflow {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	-webkit-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	position: relative;
+	height: 85%;
+	overflow-y: auto;
+	scrollbar-gutter: stable both-edges;
+	padding-right: 17px;
+	padding-left: 17px;
+}
+
+#combatCancelSpell {
+	overflow: visible;
+}
+
+.spell {
+	padding: 5px;
+	position: relative;
+	background-color: #B2A793;
+	font-size: 2.5vmin;
+	font-weight: bold;
+	border: groove 1px #929292;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	color: black;
+	cursor: pointer;
+	display: inline-block;
+}
+
+.item {
+	padding: 5px;
+	position: relative;
+	background-color: #B2A793;
+	font-size: 2.5vmin;
+	font-weight: bold;
+	border: groove 1px #929292;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	color: black;
+	cursor: pointer;
+	display: inline-block;
+}
+
+.spellTitle {
+	font-size: 3vmin;
+	position: relative;
+	top: 0;
+	margin: 0px;
+	margin-bottom: 1%;
+}
+
+.itemsTitle {
+	font-size: 3vmin;
+	position: relative;
+	top: 0;
+	margin: 0px;
+	margin-bottom: 1%;
+}
+
+.combatItemsTitle {
+	position: relative;
+	top: 0;
+	margin-top: 0px;
+	user-select: text;
+	font-size: 2.2vmin;
+}
+
+.weapon {
+	padding: 5px;
+	position: relative;
+	background-color: #B2A793;
+	font-size: 2.5vmin;
+	font-weight: bold;
+	border: groove 1px #929292;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	color: black;
+	cursor: pointer;
+	display: inline-block;
+}
+
+#noSpellbookText {
+	font-size: 2.5vmin;
+}
+
+.spellInfo {
+	background: #B2A793;
+	color: black;
+	text-align: center;
+	position: fixed;
+	font-size: 1.5vmin;
+	font-weight: normal;
+	z-index: 1;
+	padding: 5px;
+	border-radius: 6px;
+	width: 20vmin;
+}
+
+.spellInfo h3 {
+	font-family: "EndorFont";
+	margin: 2%;
+	font-size: 2vmin;
+	letter-spacing: 2px;
+	color: rgb(139, 0, 0);
+}
+
+.spellInfo p {
+	margin: 2%;
+}
+
+.spellInfo:before {
+	content: "";
+	position: absolute;
+	width: 0;
+	height: 0;
+	border-width: 10px;
+	border-style: solid;
+	border-color: transparent #B2A793 transparent transparent;
+	right: 100%;
+	top: 45%;
+}
+
+.spellCastButton {
+	color: #b9e1e4;
+    background-color: #42686b;
+    border-color: #2d5256;
+	font-size: 1.5vmin;
+	width: 6vmin;
+	cursor: pointer;
+}
+
+.itemInfo {
+	background: #B2A793;
+	color: black;
+	text-align: center;
+	position: fixed;
+	font-size: 1.5vmin;
+	font-weight: normal;
+	z-index: 1;
+	padding: 5px;
+	border-radius: 6px;
+	width: 20vmin;
+}
+
+.itemInfo h3 {
+	font-family: "EndorFont";
+	margin: 2%;
+	font-size: 2vmin;
+	letter-spacing: 2px;
+	color: rgb(139, 0, 0);
+}
+
+.itemInfo p {
+	margin: 2%;
+}
+
+.itemInfo:before {
+	content: "";
+	position: absolute;
+	width: 0;
+	height: 0;
+	border-width: 10px;
+	border-style: solid;
+	border-color: transparent #B2A793 transparent transparent;
+	right: 100%;
+	top: 40%;
+}
+
+.itemEquipButton {
+	color: #b9e1e4;
+    background-color: #42686b;
+    border-color: #2d5256;
+	font-size: 1.5vmin;
+	width: 6vmin;
+	cursor: pointer;
+}
+
+.itemUseButton {
+	color: #b9e1e4;
+    background-color: #42686b;
+    border-color: #2d5256;
+	font-size: 1.5vmin;
+	width: 6vmin;
+	cursor: pointer;
+}
+
+.locked {
+	opacity: 0.25;
+	pointer-events: none;
+}
+
+.hitPoints {
+	position: absolute;
+	top: 0%;
+}
+
+@keyframes hitPointsUpdateAnimation {
+	0% {opacity: 1;}
+	5% {opacity: 1;}
+	20% {opacity: 1;}
+	50% {opacity: 1;}
+	100% {opacity: 0;}
+}
+
+.hitPointUpdateDisplay {
+	margin-top: 0.75vh;
+	margin-bottom: 0.75vh;
+	position: absolute;
+	width: fit-content;
+	top: 7.5%;
+	left: 105%;
+	animation-name: hitPointsUpdateAnimation;
+	animation-duration: 4s;
+	font-size: 2vmin;
+}
+
+.hitPointUpdateDisplay.animate {
+	animation-name: hitPointsUpdateAnimation;
+	animation-duration: 4s;
+}
+
+.combatHeader {
+	position: absolute;
+	top: 5%;
+	max-width: 30vw;
+}
+
+.combatTurn {
+	position: absolute;
+	bottom: 5%;
+}
+
+.combatVictoryDescription {
+	position: absolute;
+	bottom: 5%;
+}
+
+.bold {
+	font-weight: bold;
+}
+
+.enemyDamageNumber {
+	color: rgb(255, 68, 68);
+}
+
+.damageNumber {
+	color: rgb(255, 68, 68);
+	text-decoration: underline dotted;
+	text-underline-offset: 10%;
+	text-decoration-thickness: 6.5%;
+	cursor: help;
+	position: relative;
+}
+
+.damageNumberInfo {
+	color: black;
+	visibility: hidden;
+	background-color: #B2A793;
+	text-align: center;
+	position: absolute;
+	font-size: 2vmin;
+	font-weight: normal;
+	z-index: 1;
+	padding: 5px;
+	border-radius: 6px;
+	width: 20vmin;
+	bottom: 130%;
+	left: -9.5vmin;
+}
+
+.damageNumber:hover .damageNumberInfo {
+	visibility: visible;
+}
+
+.damageNumberInfo:before {
+	content: "";
+	position: absolute;
+	border-width: 10px;
+	border-style: solid;
+	border-color: #B2A793 transparent  transparent transparent;
+	top: 99%;
+	left: 45%;
+}
+
+.combatPlayerHitPoints {
+	position: absolute;
+	top: 2.5%;
+	right: 4%;
+	font-size: 2.5vmin;
+}
+
+.combatPlayerArmour {
+	position: absolute;
+	top: 7.5%;
+	right: 4%;
+	font-size: 2.5vmin;
+}
+
+.green {
+	color: rgb(0, 160, 0);
+}
+
+.yellow {
+	color: rgb(255, 255, 0);
+}
+
+.red {
+	color: rgb(255, 68, 68);
+}
+
+.enemyHealthDescription {
+	position: absolute;
+	top: 2.5%;
+	left: 2.5%;
+	font-size: 2.5vmin;
+	max-width: 18vw;
+}
+
+.allocateNotification {
+	position: absolute;
+	top: 5%;
+}
+
+.allocateNotificationSubtitle {
+	font-size: 2.5vmin;
+}
+
+.armour {
+	position: absolute;
+	top: 8%;
+}
+
+.textSmall {
+	font-size: 2vmin;
+}
+
+.contentExtra {
+	font-size: 2.5vmin;
+}
+
+#combatChangeWeaponCurrent {
+	border-color: limegreen;
+	border-width: 2px;
+}
+
+.input {
+	padding: 5px;
+	background-color: white;
+	font-size: 2.5vmin;
+	font-weight: bold;
+	border: groove 1px #929292;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	color: black;
+	cursor: pointer;
+	display: inline-block;
+	text-align: center;
+}
